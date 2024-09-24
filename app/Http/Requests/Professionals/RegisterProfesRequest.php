@@ -22,13 +22,21 @@ class RegisterProfesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name'=>'required|string|max:200',
-            'gender'=>'required|string|in:Male,Female|max:100',
-            'email'=>'required|email|string|unique:professionals,email',
-            'phone'=>'required|string|unique:professionals,phone|max:100',
-            'city'=>'required|string|max:120',
-            'address'=>'required|string',
-            'password'=>'required|string|confirmed|min:8'
+            'full_name' => 'required|string|max:200',
+            'gender' => 'required|string|in:Male,Female|max:100',
+            'email' => 'required|email|string|unique:professionals,email',
+            'phone' => 'required|string|unique:professionals,phone|max:100',
+            'city' => 'required|string|max:120',
+            'address' => 'required|string',
+            'password' => 'required|string|confirmed|min:8'
         ];
+    }
+
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        throw new \Illuminate\Validation\ValidationException(
+            $validator,
+            response()->json(['errors' => $validator->errors()], 422)
+        );
     }
 }
