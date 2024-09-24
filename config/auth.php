@@ -38,15 +38,13 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => ['users','professionals'],
+            'provider' => 'users',  // Remove the array, use only 'users' or 'professionals'
         ],
-        'users' => [
+
+        'api' => [
             'driver' => 'sanctum',
-            'provider' => 'users',
-        ],
-        'professionals' => [
-            'driver' => 'sanctum',
-            'provider' => 'professionals',
+            'provider' => 'professionals', // Use 'professionals' since you're working with professionals
+            'hash' => false,
         ],
     ],
 
@@ -72,16 +70,17 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
         'professionals' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Professional::class,
+            'model' => App\Models\Professional::class,  // Ensure this is your Professional model
         ],
-    
+    ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -22,8 +22,16 @@ class LoginProfesLogin extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=>'required|email|exists:professionals,email',
-            'password'=>'required|string|min:8'
+            'email' => 'required|email|exists:professionals,email',
+            'password' => 'required|string|min:8'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'We need your email address to log you in.',
+            'password.required' => 'Please enter your password.',
         ];
     }
 }
